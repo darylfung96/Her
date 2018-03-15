@@ -1,5 +1,5 @@
 # Her
-Artificial Intelligence partner
+Your Artificial Intelligence Partner
 
 I. Features from users’ perspectives
   - Speaking to users like a real human
