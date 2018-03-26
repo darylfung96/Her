@@ -23,3 +23,7 @@ class TwitterDataset(Dataset):
     def preprocessed_data(self):
         self._preprocessed_data = self._raw_data.split('\n')
 
+        self._preprocessed_data = [data.replace('%amp; ', '') for data in self._preprocessed_data]
+        self._preprocessed_data = [data.replace('%gt; ', '') for data in self._preprocessed_data]
+
+TwitterDataset()
