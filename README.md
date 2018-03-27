@@ -8,3 +8,12 @@ I. Features from users’ perspectives
   - Gives valuable feedback(e.g. advices, emotional support: caring)  by learning from the past conversation
   - Has humor
   - Has the knowledge of herself(name, height, weight …)
+
+
+# CODE OF CONDUCT
+- When creating new branch, please specify it as type-version-nameOfBranch.
+    - Types are: Feature, Fix, Improvement.
+    - Version depends on your current version.
+    - name of branch
+    
+    
