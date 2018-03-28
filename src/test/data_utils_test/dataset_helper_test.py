@@ -1,8 +1,8 @@
 import unittest
 from unittest import TestCase
 
-from DataUtils import Dataset
-from DataUtils.DataConfig import DATA_SETTINGS
+from data_utils.dataset_helper import Dataset
+from data_utils.data_utils_config import DATA_SETTINGS
 
 class DatasetTest(TestCase):
 
@@ -25,7 +25,6 @@ class DatasetTest(TestCase):
         dataset = Dataset(data_name)
 
         self.assertEqual(dataset.filename, DATA_SETTINGS[data_name], 'location directory test')
-
 
 
 if __name__ == '__main__':
