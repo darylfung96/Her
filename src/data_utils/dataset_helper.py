@@ -1,4 +1,4 @@
-from src.DataUtils.DataConfig import DATA_SETTINGS
+from src.data_utils.data_utils_config import DATA_SETTINGS
 
 class Dataset:
     def __init__(self, dataset_name):
@@ -10,6 +10,7 @@ class Dataset:
     @property
     def get_raw_data(self):
         return self._raw_data
+
     @property
     def get_preprocessed_data(self):
         return self._preprocessed_data

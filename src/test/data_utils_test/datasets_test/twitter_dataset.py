@@ -1,6 +1,6 @@
 import unittest
 
-from src.DataUtils import TwitterDataset
+from src.data_utils import TwitterDataset
 
 class TwitterDatasetTest(unittest.TestCase):
 

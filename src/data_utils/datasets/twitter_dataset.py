@@ -1,6 +1,6 @@
 import os
 
-from src.DataUtils.Dataset import Dataset
+from src.data_utils.dataset_helper import Dataset
 
 class TwitterDataset(Dataset):
 
@@ -13,7 +13,7 @@ class TwitterDataset(Dataset):
 
     def retrieve_data(self):
         dir = os.path.dirname(os.path.realpath(__file__))
-        data_path = os.path.join(dir, '../', '../', 'Data')
+        data_path = os.path.join(dir, '../', '../', 'data')
         data_file = os.path.join(data_path, self.filename)
 
         with open(data_file, 'r') as f:

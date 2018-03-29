@@ -1,6 +1,6 @@
 import unittest
 
-from src.DataUtils.DataConfig import DATA_SETTINGS
+from src.data_utils.data_utils_config import DATA_SETTINGS
 
 class DataConfigTest(unittest.TestCase):
 
