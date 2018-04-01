@@ -46,10 +46,17 @@ class TokenizerWrapperTest(unittest.TestCase):
         self.assertTrue(tokenized_texts[1][0] == "i'm")
         self.assertTrue(tokenized_texts[1][-1] == 'you')
 
+
+        """ test edge cases"""
         tokenized_texts = "how is he doing there he said he did not do that then it is not his fault"
         tokenized_texts = tokenizer_wrapper.tokenize(tokenized_texts)
         self.assertTrue(tokenized_texts[0] == "how's")
         self.assertTrue(tokenized_texts[-1] == "fault")
+
+        tokenized_texts = "I would not ever want to would not play with would not"
+        tokenized_texts = tokenizer_wrapper.tokenize(tokenized_texts)
+        self.assertTrue(tokenized_texts[0] == "i")
+        self.assertTrue(tokenized_texts[-1] == "wouldn't")
 
         tokenized_texts = np.array([12,34])
         tokenize_test_type_error = lambda : tokenizer_wrapper.tokenize(tokenized_texts)
