@@ -1,14 +1,15 @@
 import os
+from nltk.tokenize import word_tokenize
 
 from src.data_utils.dataset_helper import Dataset
 from src.data_utils.preprocessing_helper import get_reverse_contractions
+from src.data_utils.tokenizer_wrapper import TokenizerWrapper
 
 
 class TwitterDataset(Dataset):
 
-    def __init__(self, tokenizer):
-        super(TwitterDataset, self).__init__('twitter')
-        self.tokenizer = tokenizer
+    def __init__(self, tokenizer, twitter_filename='twitter'):
+        super(TwitterDataset, self).__init__(twitter_filename, tokenizer)
         self.retrieve_data()
         self.preprocessed_data()
 
@@ -28,5 +29,6 @@ class TwitterDataset(Dataset):
         reverse_contractions = get_reverse_contractions()
 
 
-from nltk.tokenize import word_tokenize
-TwitterDataset(word_tokenize())
+        self._preprocessed_data = preprocessed_data
+
+

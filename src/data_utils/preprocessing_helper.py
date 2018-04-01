@@ -27,7 +27,7 @@ CONTRACTIONS = {
                 }
 
 
-def _get_contractions():
+def get_contractions():
     return CONTRACTIONS
 
 

@@ -1,3 +1,4 @@
 {
-  "twitter": "twitter_en.txt"
+  "twitter": "twitter_en.txt",
+  "twitter_test": "twitter_en_test.txt"
 }
