@@ -22,6 +22,15 @@ class TwitterDatasetTest(unittest.TestCase):
         self.assertTrue(preprocessed_data is not None)
         self.assertTrue(preprocessed_data[0] is not None)
 
+    def test_inputs(self):
+        self.assertTrue(len(self.dataset.inputs) > 0)
+
+    def test_targets(self):
+        self.assertTrue(len(self.dataset.targets) > 0)
+
+    def test_same_inputs_targets(self):
+        self.assertTrue(len(self.dataset.inputs) == len(self.dataset.targets))
+
 
 if __name__ == '__main__':
     unittest.main()
