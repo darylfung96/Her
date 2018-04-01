@@ -42,6 +42,8 @@ class TokenizerWrapper:
         if type(sentence) not in (str, np.str_):
             raise TypeError('value passed into tokenize_text has to be a string')
 
+        sentence = sentence.lower()
+
         reverse_contractions = get_reverse_contractions()
 
         for key, value in reverse_contractions.items():
