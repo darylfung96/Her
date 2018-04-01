@@ -1,6 +1,7 @@
 import numpy as np
+from typing import Union
 
-from src.data_utils.preprocessing_helper import get_reverse_contractions
+from src.data_utils.preprocessing_helper import get_abbreviations, get_prioritize_abbreviations
 
 class TokenizerWrapper:
 
@@ -44,11 +45,35 @@ class TokenizerWrapper:
 
         sentence = sentence.lower()
 
-        reverse_contractions = get_reverse_contractions()
+        reverse_priortize_contractions = get_prioritize_abbreviations()
+        reverse_contractions = get_abbreviations()
 
-        for key, value in reverse_contractions.items():
-            sentence = sentence.replace(key, value)
+        tokens = self.tokenizer(sentence)
 
-        texts = self.tokenizer(sentence)
+        contracted_tokens = self.__replace_words(tokens, reverse_priortize_contractions)
+        contracted_tokens = self.__replace_words(contracted_tokens, reverse_contractions)
 
-        return texts
+        return contracted_tokens
+
+
+
+    def __replace_words(self, tokens, contractions: dict):
+        contracted_tokens = []
+        index = 0
+        while index < len(tokens)-1:
+            new_text = "{} {}".format(tokens[index], tokens[index + 1])
+
+            shorten_text = contractions.get(new_text)
+
+            if shorten_text:
+                contracted_tokens.append(shorten_text)
+                index += 2
+            else:
+                contracted_tokens.append(tokens[index])
+                index += 1
+
+        # when there is a leftover last word that wasn't added to the new contracted text, then we add it back in
+        if index == len(tokens)-1:
+            contracted_tokens.append(tokens[index])
+
+        return contracted_tokens
