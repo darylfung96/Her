@@ -10,22 +10,17 @@ with open(ABBREVIATIONS_DIR) as f:
 with open(PRIORITIZE_ABBREVIATIONS_DIR) as f:
     PRIORITIZE_ABBREVIATIONS = json.load(f)
 
-
 def get_abbreviations():
     return CONTRACTIONS
-
 
 def get_prioritize_abbreviations():
     return PRIORITIZE_ABBREVIATIONS
 
-
 def get_contractions():
     return __get_contractions(CONTRACTIONS)
 
-
 def get_priortize_contractions():
     return __get_contractions(PRIORITIZE_ABBREVIATIONS)
-
 
 def __get_contractions(abbreviations: dict):
     contractions = dict()
@@ -34,5 +29,3 @@ def __get_contractions(abbreviations: dict):
         contractions[value] = key
 
     return contractions
-
-
