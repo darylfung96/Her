@@ -1,18 +1,18 @@
 import json
 import os
 
-ABBREVIATIONS_FILES_DIR = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../..', 'Data', 'contractions')
+ABBREVIATIONS_FILES_DIR = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../..', 'Data', 'abbreviations')
 ABBREVIATIONS_DIR = os.path.join(ABBREVIATIONS_FILES_DIR, 'abbreviations.json')
 PRIORITIZE_ABBREVIATIONS_DIR = os.path.join(ABBREVIATIONS_FILES_DIR, 'prioritize_abbreviations.json')
 
 with open(ABBREVIATIONS_DIR) as f:
-    CONTRACTIONS = json.load(f)
+    ABBREVIATIONS = json.load(f)
 with open(PRIORITIZE_ABBREVIATIONS_DIR) as f:
     PRIORITIZE_ABBREVIATIONS = json.load(f)
 
 
 def get_abbreviations():
-    return CONTRACTIONS
+    return ABBREVIATIONS
 
 
 def get_prioritize_abbreviations():
@@ -20,7 +20,7 @@ def get_prioritize_abbreviations():
 
 
 def get_contractions():
-    return __get_contractions(CONTRACTIONS)
+    return __get_contractions(ABBREVIATIONS)
 
 
 def get_priortize_contractions():
