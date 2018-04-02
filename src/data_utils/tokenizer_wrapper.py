@@ -1,7 +1,7 @@
 import numpy as np
 from typing import Union
 
-from src.data_utils.preprocessing_helper import get_abbreviations, get_prioritize_abbreviations
+from src.data_utils.preprocessing_helper import get_abbreviations, get_prioritized_abbreviations
 
 class TokenizerWrapper:
 
@@ -45,7 +45,7 @@ class TokenizerWrapper:
 
         sentence = sentence.lower()
 
-        reverse_priortize_contractions = get_prioritize_abbreviations()
+        reverse_priortize_contractions = get_prioritized_abbreviations()
         reverse_contractions = get_abbreviations()
 
         tokens = self.tokenizer(sentence)
