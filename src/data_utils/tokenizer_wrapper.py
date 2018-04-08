@@ -1,5 +1,5 @@
 import numpy as np
-from typing import Union
+import string
 
 from src.data_utils.preprocessing_helper import get_abbreviations, get_prioritized_abbreviations
 
@@ -62,10 +62,12 @@ class TokenizerWrapper:
         index = 0
         while index < len(tokens)-1:
             new_text = "{} {}".format(tokens[index], tokens[index + 1])
+            new_text_no_punc = new_text.translate(new_text.maketrans("", "", string.punctuation))
 
-            shorten_text = contractions.get(new_text)
+            shorten_text = contractions.get(new_text_no_punc)
 
             if shorten_text:
+                shorten_text = new_text.replace(new_text_no_punc, shorten_text)
                 contracted_tokens.append(shorten_text)
                 index += 2
             else:

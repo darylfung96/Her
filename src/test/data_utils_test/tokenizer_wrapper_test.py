@@ -14,13 +14,17 @@ class TokenizerWrapperTest(unittest.TestCase):
         self.assertTrue(callable(tokenizer_wrapper.tokenizer))
 
 
-    def test_tokenize(self):
-        # test string split tokenizer
+    def test_split_tokenize(self):
         tokenizer_wrapper = TokenizerWrapper(lambda string: string.split())
         tokenized_text = tokenizer_wrapper.tokenize('hello how are you')
         self.assertTrue(tokenized_text[0] == 'hello')
-        self.assertTrue(tokenized_text[-1] == 'you')
 
+        tokenized_text = tokenizer_wrapper.tokenize("it is, crazy. No matter what he is.")
+        self.assertTrue(tokenized_text[0] == "it's,")
+
+
+
+    def test_nltk_word_tokenize(self):
         # test nltk tokenizer
         tokenizer_wrapper = TokenizerWrapper(word_tokenize)
         tokenized_text = tokenizer_wrapper.tokenize('hello how are you')
