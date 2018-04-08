@@ -13,7 +13,6 @@ class TokenizerWrapper:
         """
         self.tokenizer = tokenizer
 
-
     def tokenize(self, texts):
         """
         the main helper is in _tokenize_text
@@ -27,7 +26,6 @@ class TokenizerWrapper:
             return self._tokenize_text(texts)
         else:
             return self._tokenize_array(texts)
-
 
     def _tokenize_array(self, texts):
         assert type(texts) in (np.ndarray, list)
@@ -50,14 +48,12 @@ class TokenizerWrapper:
 
         tokens = self.tokenizer(sentence)
 
-        contracted_tokens = self.__replace_words(tokens, reverse_priortize_contractions)
-        contracted_tokens = self.__replace_words(contracted_tokens, reverse_contractions)
+        contracted_tokens = self.__transform_words(tokens, reverse_priortize_contractions)
+        contracted_tokens = self.__transform_words(contracted_tokens, reverse_contractions)
 
         return contracted_tokens
 
-
-
-    def __replace_words(self, tokens, contractions: dict):
+    def __transform_words(self, tokens, contractions: dict):
         contracted_tokens = []
         index = 0
         while index < len(tokens)-1:

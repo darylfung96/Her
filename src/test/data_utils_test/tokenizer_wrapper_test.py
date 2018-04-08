@@ -13,7 +13,6 @@ class TokenizerWrapperTest(unittest.TestCase):
         tokenizer_wrapper = TokenizerWrapper(lambda string: string.split())
         self.assertTrue(callable(tokenizer_wrapper.tokenizer))
 
-
     def test_split_tokenize(self):
         tokenizer_wrapper = TokenizerWrapper(lambda string: string.split())
         tokenized_text = tokenizer_wrapper.tokenize('hello how are you')
@@ -21,8 +20,6 @@ class TokenizerWrapperTest(unittest.TestCase):
 
         tokenized_text = tokenizer_wrapper.tokenize("it is, crazy. No matter what he is.")
         self.assertTrue(tokenized_text[0] == "it's,")
-
-
 
     def test_nltk_word_tokenize(self):
         # test nltk tokenizer
@@ -34,7 +31,6 @@ class TokenizerWrapperTest(unittest.TestCase):
         # if an unknown character is passed in, it should return back the unknown character
         tokenized_text = tokenizer_wrapper.tokenize('a')
         self.assertFalse(tokenized_text[0] is None)
-
 
         """ test passing list or numpy array to tokenize function """
         tokenized_texts = tokenizer_wrapper.tokenize(['hello how are you', 'i am fine, thank you'])
@@ -50,7 +46,6 @@ class TokenizerWrapperTest(unittest.TestCase):
         self.assertTrue(tokenized_texts[1][0] == "i'm")
         self.assertTrue(tokenized_texts[1][-1] == 'you')
 
-
         """ test edge cases"""
         tokenized_texts = "how is he doing there he said he did not do that then it is not his fault"
         tokenized_texts = tokenizer_wrapper.tokenize(tokenized_texts)
@@ -63,5 +58,7 @@ class TokenizerWrapperTest(unittest.TestCase):
         self.assertTrue(tokenized_texts[-1] == "wouldn't")
 
         tokenized_texts = np.array([12,34])
-        tokenize_test_type_error = lambda : tokenizer_wrapper.tokenize(tokenized_texts)
+
+        def tokenize_test_type_error():
+            return tokenizer_wrapper.tokenize(tokenized_texts)
         self.assertRaises(TypeError, tokenize_test_type_error)
