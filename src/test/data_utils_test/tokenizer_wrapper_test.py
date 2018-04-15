@@ -21,6 +21,20 @@ class TokenizerWrapperTest(unittest.TestCase):
         tokenized_text = tokenizer_wrapper.tokenize("it is, crazy. No matter what he is.")
         self.assertTrue(tokenized_text[0] == "it's,")
 
+    def test_split_detokenize(self):
+        tokenizer_wrapper = TokenizerWrapper(lambda string: string.split(), lambda array_of_word: ' '.join(array_of_word))
+        detokenized_text = tokenizer_wrapper.detokenize(['hello', 'how', 'are', 'you'])
+        self.assertTrue(detokenized_text[0] == 'h')
+        self.assertFalse(detokenized_text[-1] == 'a')
+        self.assertTrue(type(detokenized_text) == str)
+
+        detokenized_text = tokenizer_wrapper.detokenize([
+            ['hello', 'how', 'are', 'you'],
+            ['my', 'name', 'welcomes', 'you']
+        ])
+        self.assertTrue(detokenized_text[0] == 'hello how are you')
+        self.assertTrue(detokenized_text[1] == 'my name welcomes you')
+
     def test_nltk_word_tokenize(self):
         # test nltk tokenizer
         tokenizer_wrapper = TokenizerWrapper(word_tokenize)

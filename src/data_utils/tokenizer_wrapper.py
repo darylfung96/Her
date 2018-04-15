@@ -5,13 +5,14 @@ from src.data_utils.preprocessing_helper import get_abbreviations, get_prioritiz
 
 class TokenizerWrapper:
 
-    def __init__(self, tokenizer):
+    def __init__(self, tokenizer, detokenizer=None):
         """
 
         :param tokenizer: a function that can be called right away to tokenize text
                             e.g: tokenizer('hey how are you')  -> ['hey', 'how', 'are', 'you']
         """
         self.tokenizer = tokenizer
+        self.detokenizer = detokenizer
 
     def tokenize(self, texts):
         """
@@ -24,8 +25,24 @@ class TokenizerWrapper:
         """
         if type(texts) == str:
             return self._tokenize_text(texts)
-        else:
+        elif type(texts) in [list, np.ndarray]:
             return self._tokenize_array(texts)
+
+    def detokenize(self, texts):
+        """
+        the main helper is in __detokenize_text
+        this function helps to delegate task and choose the function that deals with either a single array or with multiple arrays
+        :param texts: a list of tokenized words array or a single tokenized word array
+        :return: detokenized text
+        """
+        if type(texts) not in [np.ndarray, list]:
+            raise TypeError("Array has to be passed into this function.")
+
+        if type(texts[0]) in [list, np.ndarray]:
+            return self._detokenize_texts(texts)
+        elif type(texts[0]) == str:
+            return self._detokenize_text(texts)
+
 
     def _tokenize_array(self, texts):
         assert type(texts) in (np.ndarray, list)
@@ -75,3 +92,23 @@ class TokenizerWrapper:
             contracted_tokens.append(tokens[index])
 
         return contracted_tokens
+
+    def _detokenize_texts(self, array_of_texts):
+        """
+        transform each array of text into a string
+        :param array_of_texts: [
+                                    ['hello', 'how', 'are', 'you'],
+                                    ['my', 'name', 'is', 'good']
+                                ]
+
+        :return:                ['hello how are you', 'my name is good']
+        """
+        return [self._detokenize_text(array_of_text) for array_of_text in array_of_texts]
+
+    def _detokenize_text(self, array_of_text):
+        """
+        combine the array of word into a string
+        :param array_of_text: ['hello', 'how', 'are', 'you']
+        :return: 'hello how are you'
+        """
+        return self.detokenizer(array_of_text)
